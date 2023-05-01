@@ -26,9 +26,7 @@ class HorairesController extends AbstractController
         //var_dump($horairesJson);
         //$horaire->gg();
 
-        return $this->json([
-            'horaires' => $horairesJson,
-        ]);
+        return $this->json($horairesJson);
     }
 
     #[Route('horaires/{id}/{semaine}', name: 'app_horaires_semaine')]
@@ -36,8 +34,8 @@ class HorairesController extends AbstractController
     {
         $horairesSemaine = $em->getRepository(Horaires::class)->findBy(["employe_id" => $id, "semaine" => $semaine]);
 
-        return $this->json([
-            'horaires' => $horairesSemaine[0]->getAllHoraires(),
-        ]);
+        return $this->json(
+            $horairesSemaine[0]->getAllHoraires(),
+        );
     }
 }
